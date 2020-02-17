@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Symbol</th>
+            <th>Name</th>
+            <th>Shares</th>
+            <th>Total</th>
+            <th>Transacted</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in data %}
+        <tr>
+            <th>{{ row['symbol'] }}</th>
+            <th>{{ row['company_name'] }}</th>
+            <th>{{ row['shares'] }}</th>
+            <th>{{ row['total'] }}</th>
+            <th>{{ row['transaction_time'] }}</th>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
