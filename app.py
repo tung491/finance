@@ -46,7 +46,7 @@ if not os.environ.get("API_KEY"):
 def index():
     user_id = session['user_id']
     """Show portfolio of stocks"""
-    data = db.execute("SELECT symbol, company_name, shares "
+    data = db.execute("SELECT symbol, company_name, sum(shares) as shares "
                       "from transactions where user_id = :user_id "
                       "group by symbol;", user_id=session['user_id'])
     for row in data:
@@ -90,7 +90,7 @@ def buy():
                            "VALUES (:symbol, :company_name , :shares, :price, :total, :user_id, :transaction_time)",
                            symbol=symbol, company_name=name, shares=shares, price=price, total=total, user_id=user_id,
                            transaction_time=datetime.datetime.now())
-                redirect('/index')
+                return redirect('/')
             else:
                 apology("don't have enough money")
         else:
